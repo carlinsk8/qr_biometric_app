@@ -1,0 +1,30 @@
+name: qr_biometric_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  biometric_storage: ^5.0.1
+  equatable: ^2.0.7
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.0
+  flutter_secure_storage: ^9.2.4
+  get_it: ^8.0.3
+  path_provider: ^2.1.5
+  pigeon: ^25.3.1
+  sqflite: ^2.4.2
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.4.6
+
+flutter:
+
+  uses-material-design: true
