@@ -1,0 +1,11 @@
+default_platform(:android)
+
+platform :android do
+  desc "Compila un APK release"
+  lane :build do
+    gradle(
+      task: "assemble",
+      build_type: "Release"
+    )
+  end
+end
