@@ -140,7 +140,7 @@ Resultado esperado:
 
 Puedes descargar el APK aquí:
 
-**[Enlace de descarga del APK](https://github.com/usuario/repositorio/releases/latest)**
+**[Enlace de descarga del APK](https://github.com/carlinsk8/qr_biometric_app/releases/latest/download/app-release.apk)**
 
 ---
 

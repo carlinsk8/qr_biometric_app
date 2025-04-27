@@ -1,0 +1,10 @@
+project_root = ".."
+
+platform :android do
+  desc "Build Flutter APK"
+  lane :build do
+    sh("cd #{project_root} && flutter pub get", log: true)
+    sh("cd #{project_root} && flutter test", log: true)
+    sh("cd #{project_root} && flutter build apk --release", log: true)
+  end
+end

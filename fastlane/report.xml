@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: cd .. &amp;&amp; flutter pub get" time="0.977189">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: cd .. &amp;&amp; flutter test" time="2.281634">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: cd .. &amp;&amp; flutter build apk --release" time="40.633286">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
