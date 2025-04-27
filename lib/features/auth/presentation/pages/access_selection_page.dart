@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import '../../../../core/services/secure_storage_service.dart';
 import '../../../../core/theme/app_colors.dart';
 
 import '../../../../core/platform_channels/biometric_auth_api.dart';
+import '../../../../core/utils/generate_token.dart';
 
 class AccessSelectionPage extends StatefulWidget {
   const AccessSelectionPage({super.key});
@@ -25,10 +27,12 @@ class _AccessSelectionPageState extends State<AccessSelectionPage> {
 
   void _onBiometricPressed() async {
     final isAvailable = await BiometricAuthApi().authenticate();
+    await sl<SecureStorageService>().saveAuthToken(generateAuthToken());
 
     if (!mounted) return;
 
     if (isAvailable) {
+      
       Navigator.of(context).pushReplacementNamed('/qrList');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
