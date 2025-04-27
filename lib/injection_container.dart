@@ -7,7 +7,6 @@ import 'features/auth/data/datasources/auth_local_datasources.dart';
 import 'features/auth/data/repositories/auth_repository_impl.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
 import 'features/auth/domain/usecases/authenticate_user.dart';
-import 'features/auth/domain/usecases/check_has_pin_usecase.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 
 import 'features/qr_scan/data/datasources/qr_local_datasource.dart';
@@ -44,7 +43,6 @@ void _initAuthFeature() {
 
   // UseCases
   sl.registerLazySingleton(() => AuthenticateUser(sl()));
-  sl.registerLazySingleton(() => CheckHasPinUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<AuthRepository>(

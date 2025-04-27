@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import '../../../../core/theme/app_colors.dart';
 
 import '../../../../core/platform_channels/biometric_auth_api.dart';
-import '../../../../core/services/secure_storage_service.dart';
 
 class AccessSelectionPage extends StatefulWidget {
   const AccessSelectionPage({super.key});
@@ -15,24 +14,11 @@ class AccessSelectionPage extends StatefulWidget {
 }
 
 class _AccessSelectionPageState extends State<AccessSelectionPage> {
-  bool _hasPin = false;
-  bool _hasAuthToken = false;
   final sl = GetIt.instance;
 
   @override
   void initState() {
     super.initState();
-    _checkAccessConditions();
-  }
-
-  Future<void> _checkAccessConditions() async {
-    final pinResult = await sl<SecureStorageService>().hasPin();
-    final tokenResult = await sl<SecureStorageService>().hasAuthToken();
-
-    setState(() {
-      _hasPin = pinResult;
-      _hasAuthToken = tokenResult;
-    });
   }
 
   
@@ -51,43 +37,12 @@ class _AccessSelectionPageState extends State<AccessSelectionPage> {
     }
   }
 
-  void _onPinPressed() {
-    Navigator.of(context).pushReplacementNamed('/pinAuth');
-  }
 
-  void _onCreatePinPressed() {
-    Navigator.of(context).pushReplacementNamed('/createPin');
-  }
 
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    if (!_hasAuthToken) {
-      return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.fingerprint, size: 100, color: theme.primaryColor),
-              const SizedBox(height: 24),
-              Text(
-                'Por favor crea un PIN para habilitar el acceso.',
-                style: theme.textTheme.bodyLarge,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: _onCreatePinPressed,
-                child: const Text('Crear PIN'),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -120,13 +75,7 @@ class _AccessSelectionPageState extends State<AccessSelectionPage> {
                 onPressed: _onBiometricPressed,
                 child: const Text('Autenticar con biometría'),
               ),
-              if (_hasPin) ...[
-                const SizedBox(height: 16),
-                TextButton(
-                  onPressed: _onPinPressed,
-                  child: const Text('¿Prefieres usar PIN?'),
-                ),
-              ],
+              
             ],
           ),
         ),

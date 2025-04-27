@@ -12,28 +12,10 @@ class SecureStorageService {
   // ignore: unused_element
   SecureStorageService._internalForTest(this._storage);
 
-  static const _pinKey = 'user_pin';
   static const _authTokenKey = 'auth_token';
-
-  Future<bool> hasPin() async {
-    final pin = await _storage.read(key: _pinKey);
-    return pin != null;
-  }
-
-  Future<void> savePin(String pin) async {
-    await _storage.write(key: _pinKey, value: pin);
-  }
 
   Future<void> logout() async {
     await _storage.deleteAll();
-  }
-
-  Future<String?> getPin() async {
-    return await _storage.read(key: _pinKey);
-  }
-
-  Future<void> deletePin() async {
-    await _storage.delete(key: _pinKey);
   }
 
   Future<void> saveAuthToken(String token) async {
