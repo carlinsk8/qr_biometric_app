@@ -1,30 +1,44 @@
 name: qr_biometric_app
-description: "A new Flutter project."
+description: Aplicación Flutter que permite autenticarse mediante biometría (huella o rostro) y escanear códigos QR usando un módulo nativo Android (Kotlin + CameraX + MLKit), aplicando Clean Architecture, comunicación nativa segura y automatización de builds.
 publish_to: 'none'
+
 version: 1.0.0+1
 
 environment:
   sdk: ^3.7.2
 
+repository: https://github.com/carlinsk8/qr_biometric_app
+homepage: https://github.com/carlinsk8/qr_biometric_app
+issue_tracker: https://github.com/carlinsk8/qr_biometric_app/issues
+
 dependencies:
-  biometric_storage: ^5.0.1
-  equatable: ^2.0.7
   flutter:
     sdk: flutter
+  
+  # State Management
   flutter_bloc: ^9.1.0
-  flutter_secure_storage: ^9.2.4
+  equatable: ^2.0.7
   get_it: ^8.0.3
-  path_provider: ^2.1.5
-  pigeon: ^25.3.1
+
+  # Secure Storage & Biometric Authentication
+  biometric_storage: ^5.0.1
+  flutter_secure_storage: ^9.2.4
+
+  # Data Persistence
   sqflite: ^2.4.2
+  path_provider: ^2.1.5
+
+  # Native Communication
+  pigeon: ^25.3.1
 
 dev_dependencies:
-  bloc_test: ^10.0.0
-  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # Testing Libraries
+  bloc_test: ^10.0.0
   mockito: ^5.4.6
 
 flutter:
-
   uses-material-design: true

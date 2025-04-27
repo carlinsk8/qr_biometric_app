@@ -140,7 +140,7 @@ Resultado esperado:
 
 Puedes descargar el APK aquí:
 
-**[Enlace de descarga del APK](https://drive.google.com/file/d/1T-ndKczW8ZdF48PfVr8xdwAFJAK_LiOq/view?usp=sharing)**
+**[Enlace de descarga del APK](https://github.com/usuario/repositorio/releases/latest)**
 
 ---
 

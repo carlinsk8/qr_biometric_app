@@ -1,11 +1,10 @@
 default_platform(:android)
 
 platform :android do
-  desc "Compila un APK release"
+  desc "Compilar APK de Flutter en Release"
   lane :build do
-    gradle(
-      task: "assemble",
-      build_type: "Release"
-    )
+    sh("flutter", "pub", "get") # Asegura dependencias actualizadas
+    sh("flutter", "test") # Corre los tests antes de compilar (opcional)
+    sh("flutter", "build", "apk", "--release") # Build Flutter APK Release
   end
 end
