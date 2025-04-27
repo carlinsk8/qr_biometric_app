@@ -4,6 +4,16 @@ Aplicación Flutter que permite autenticarse mediante biometría (huella o rostr
 
 ---
 
+## 🎥 Demo Rápido
+
+| Flujo principal | Escaneo de QR |
+|:---:|:---:|
+| ![Demo Biometría](screenshot/gif_qr_biometric_app.gif) | ![Boton Inicial](screenshot/biometric_init.jpg) |
+|:---:|:---:|
+| ![Biometría](screenshot/biometric.jpg) | ![Escaneo QR](screenshot/qr_scan.jpg) |
+
+---
+
 ## 🚀 Requisitos
 
 - Flutter 3.29.2
