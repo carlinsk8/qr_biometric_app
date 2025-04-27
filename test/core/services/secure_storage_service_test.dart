@@ -1,62 +1,73 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:qr_biometric_app/core/services/secure_storage_service.dart';
 
 class MockFlutterSecureStorage extends Mock implements FlutterSecureStorage {}
 
 void main() {
   late MockFlutterSecureStorage mockSecureStorage;
+  late SecureStorageService storageService;
 
   setUp(() {
     mockSecureStorage = MockFlutterSecureStorage();
+    // storageService = SecureStorageService.instance;
   });
 
   group('SecureStorageService Tests', () {
-    test('savePin guarda correctamente el PIN', () async {
+    test('logout elimina todos los datos del almacenamiento seguro', () async {
+      when(() => mockSecureStorage.deleteAll()).thenAnswer((_) async {});
+
+      await mockSecureStorage.deleteAll();
+
+      verify(() => mockSecureStorage.deleteAll()).called(1);
+    });
+
+    test('saveAuthToken guarda correctamente el token de autenticación', () async {
       when(() => mockSecureStorage.write(key: any(named: 'key'), value: any(named: 'value')))
           .thenAnswer((_) async {});
 
-      // *** Ejecutamos el método manualmente ***
-      await mockSecureStorage.write(key: 'user_pin', value: '1234');
+      await mockSecureStorage.write(key: '_authTokenKey', value: 'test_token');
 
-      // *** Verificamos que se haya llamado bien ***
-      verify(() => mockSecureStorage.write(key: 'user_pin', value: '1234')).called(1);
+      verify(() => mockSecureStorage.write(key: '_authTokenKey', value: 'test_token')).called(1);
     });
 
-    test('getPin obtiene correctamente el PIN', () async {
+    test('getAuthToken obtiene correctamente el token de autenticación', () async {
       when(() => mockSecureStorage.read(key: any(named: 'key')))
-          .thenAnswer((_) async => '1234');
+          .thenAnswer((_) async => 'test_token');
 
-      final pin = await mockSecureStorage.read(key: 'user_pin');
+      final token = await mockSecureStorage.read(key: '_authTokenKey');
 
-      expect(pin, '1234');
+      expect(token, 'test_token');
     });
 
-    test('hasPin devuelve true si existe un PIN', () async {
-      when(() => mockSecureStorage.read(key: any(named: 'key')))
-          .thenAnswer((_) async => '1234');
-
-      final pin = await mockSecureStorage.read(key: 'user_pin');
-
-      expect(pin != null, true);
-    });
-
-    test('hasPin devuelve false si no existe PIN', () async {
-      when(() => mockSecureStorage.read(key: any(named: 'key')))
-          .thenAnswer((_) async => null);
-
-      final pin = await mockSecureStorage.read(key: 'user_pin');
-
-      expect(pin != null, false);
-    });
-
-    test('deletePin elimina el PIN', () async {
+    test('deleteAuthToken elimina el token de autenticación', () async {
       when(() => mockSecureStorage.delete(key: any(named: 'key')))
           .thenAnswer((_) async {});
 
-      await mockSecureStorage.delete(key: 'user_pin');
+      await mockSecureStorage.delete(key: '_authTokenKey');
 
-      verify(() => mockSecureStorage.delete(key: 'user_pin')).called(1);
+      verify(() => mockSecureStorage.delete(key: '_authTokenKey')).called(1);
+    });
+
+    test('hasAuthToken devuelve true si existe un token de autenticación', () async {
+      when(() => mockSecureStorage.read(key: any(named: 'key')))
+          .thenAnswer((_) async => 'test_token');
+
+      final hasToken = await mockSecureStorage.read(key: '_authTokenKey') != null;
+
+      expect(hasToken, true);
+    });
+
+    test('hasAuthToken devuelve false si no existe un token de autenticación', () async {
+      when(() => mockSecureStorage.read(key: any(named: 'key')))
+          .thenAnswer((_) async => null);
+
+      final hasToken = await mockSecureStorage.read(key: '_authTokenKey') != null;
+
+      expect(hasToken, false);
     });
   });
 }
+
+
