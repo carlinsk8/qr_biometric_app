@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../features/auth/presentation/pages/access_selection_page.dart';
+import '../../features/auth/presentation/pages/create_pin_page.dart';
 import '../../features/auth/presentation/pages/pin_auth_page.dart';
 import '../../features/qr_scan/presentation/pages/qr_list_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
@@ -11,5 +12,6 @@ class AppRoutes {
     '/accessSelection': (context) => const AccessSelectionPage(),
     '/pinAuth': (context) => const PinAuthPage(),
     '/qrList': (context) => const QrListPage(),
+    '/createPin': (context) => const CreatePinPage(),
   };
 }

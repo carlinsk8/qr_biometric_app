@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/services/secure_storage_service.dart';
 import '../../../../core/utils/date_time_format.dart';
 import '../../../../core/platform_channels/qr_scanner_channel.dart';
 import '../bloc/qr_bloc.dart';
 import '../../domain/entities/qr_code.dart';
+import 'package:get_it/get_it.dart';
 
 class QrListPage extends StatefulWidget {
   const QrListPage({super.key});
@@ -26,7 +28,15 @@ class _QrListPageState extends State<QrListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Historial de Códigos QR')),
+      appBar: AppBar(
+        title: const Text('Historial de Códigos QR'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _logout(context),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _startScan,
         child: const Icon(Icons.qr_code_scanner),
@@ -107,5 +117,16 @@ class _QrListPageState extends State<QrListPage> {
         _isScanning = false;
       });
     }
+  }
+
+  Future<void> _logout(BuildContext context) async {
+    final sl = GetIt.instance;
+    await sl<SecureStorageService>().logout();
+
+    if (!context.mounted) return;
+
+    Navigator.of(
+      context,
+    ).pushNamedAndRemoveUntil('/accessSelection', (route) => false);
   }
 }

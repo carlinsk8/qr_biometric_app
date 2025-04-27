@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import '../../../../core/widgets/secure_numeric_keyboard.dart';
 import '../../../../core/services/secure_storage_service.dart';
 
@@ -13,8 +14,8 @@ class PinAuthPage extends StatefulWidget {
 class _PinAuthPageState extends State<PinAuthPage> {
   final List<String> _pin = [];
   String? _savedPin;
-  final SecureStorageService _storageService = SecureStorageService.instance;
   String? _errorMessage;
+  final sl = GetIt.instance;
 
   @override
   void initState() {
@@ -23,7 +24,7 @@ class _PinAuthPageState extends State<PinAuthPage> {
   }
 
   Future<void> _loadSavedPin() async {
-    _savedPin = await _storageService.getPin();
+    _savedPin = await sl<SecureStorageService>().getPin();
   }
 
   void _onKeyPressed(String value) {
